@@ -1,10 +1,14 @@
-import './App.css';
+import { useState } from 'react'
+import './App.css'
+import Forecast from './components/Forecast'
 
-function App() {
+function App () {
   return (
-    <div className="App">
+    <div className='App'>
+      <Forecast></Forecast>
+      <footer>Page created by SG &#169;2021</footer>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
