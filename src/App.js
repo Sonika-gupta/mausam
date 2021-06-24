@@ -7,7 +7,9 @@ import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup'
 
 function App () {
   const [unit, setUnit] = useState('metric')
-  const [cities, setCities] = useState(localStorage.getItem('cities') || [])
+  const [cities, setCities] = useState(
+    JSON.parse(localStorage.getItem('cities') || [])
+  )
   // console.log(cityList.find(obj => obj.id === 833))
 
   function updateCities ({ coords: { latitude, longitude } }) {

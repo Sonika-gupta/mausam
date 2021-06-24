@@ -2,11 +2,11 @@ import { useState, useEffect } from 'react'
 import { WeatherForecastAPI as data } from '../sample-data.json'
 import { Card, CardContent, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-// import getForecast from '../getForecast'
-const getForecast = loc => {
+import getForecast from '../getForecast'
+/* const getForecast = loc => {
   console.log('fetching forecasts')
   return data
-}
+} */
 
 const useStyles = makeStyles({
   root: {
@@ -15,7 +15,7 @@ const useStyles = makeStyles({
     margin: 'auto'
   },
   city: {
-    width: '80%',
+    width: '70%',
     textAlign: 'left'
   },
   temp: {
@@ -32,15 +32,19 @@ function getTime ({ timezone }) {
   })
 }
 export default function Forecast ({ cities, unit }) {
-  console.log('cities:', cities)
+  console.log('cities:', cities, 'unit', unit)
   const [forecasts, setForecasts] = useState([])
 
   useEffect(() => {
-    const forecasts = []
-    cities.forEach(async city => {
-      forecasts.push(getForecast(city))
-    })
-    setForecasts(forecasts)
+    const weather = []
+    ;(async function () {
+      for (let city of cities) {
+        const x = await getForecast(city)
+        console.log('----', x)
+        weather.push(x)
+      }
+      setForecasts(weather)
+    })()
   }, [cities, unit])
 
   console.log('forecasts:', forecasts)
