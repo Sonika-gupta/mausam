@@ -1,49 +1,71 @@
 import { useState, useEffect } from 'react'
-import data from '../sample-data.json'
-import Condition from './Condition'
-const Forecast = () => {
-  const [city, setCity] = useState('')
-  const [unit, setUnit] = useState('metric')
-  const [weather, setWeather] = useState('')
-  useEffect(() => {
-    setWeather(data[city])
-  }, [city])
-  return (
-    <div>
-      <form onSubmit={e => e.preventDefault()}>
-        <input
-          type='text'
-          value={city}
-          onChange={e => {
-            console.log(city)
-            setCity(e.target.value)
-          }}
-        />
-        <div
-          onChange={e => {
-            console.log(e.target.value)
-            setUnit(e.target.value)
-          }}
-        >
-          <label>
-            <input type='radio' name='unit' value='imperial' />
-            &deg;F
-          </label>
-          <label>
-            <input type='radio' name='unit' value='metric' />
-            &deg;C
-          </label>
-        </div>
-      </form>
-
-      {weather && (
-        <div>
-          <h3>{weather.name}</h3>
-          <Condition weather={weather} />
-        </div>
-      )}
-    </div>
-  )
+import { WeatherForecastAPI as data } from '../sample-data.json'
+import { Card, CardContent, Typography } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
+// import getForecast from '../getForecast'
+const getForecast = loc => {
+  console.log('fetching forecasts')
+  return data
 }
 
-export default Forecast
+const useStyles = makeStyles({
+  root: {
+    maxWidth: '500px',
+    display: 'flex',
+    margin: 'auto'
+  },
+  city: {
+    width: '80%',
+    textAlign: 'left'
+  },
+  temp: {
+    margin: 'auto'
+  }
+})
+
+function getTime ({ timezone }) {
+  const date = new Date(Date.now() + timezone * 1000)
+  return date.toLocaleTimeString('en-US', {
+    timeZone: 'UTC',
+    hour: '2-digit',
+    minute: '2-digit'
+  })
+}
+export default function Forecast ({ cities, unit }) {
+  console.log('cities:', cities)
+  const [forecasts, setForecasts] = useState([])
+
+  useEffect(() => {
+    const forecasts = []
+    cities.forEach(async city => {
+      forecasts.push(getForecast(city))
+    })
+    setForecasts(forecasts)
+  }, [cities, unit])
+
+  console.log('forecasts:', forecasts)
+
+  const classes = useStyles()
+  return (
+    <ul>
+      {new Date().toUTCString()}
+      {forecasts.map(forecast => (
+        <Card key={forecast.id} className={classes.root}>
+          <CardContent>
+            <img
+              style={{ marginTop: '25%' }}
+              src={`http://openweathermap.org/img/w/${forecast.weather[0].icon}.png`}
+            ></img>
+          </CardContent>
+          <CardContent className={classes.city}>
+            <Typography variant='overline'>{getTime(forecast)}</Typography>
+            <Typography variant='h5'>{forecast.name}</Typography>
+          </CardContent>
+          <CardContent className={classes.temp}>
+            <Typography variant='h4'>{forecast.main.temp}</Typography>
+          </CardContent>
+        </Card>
+      ))}
+    </ul>
+  )
+}
