@@ -1,8 +1,8 @@
-export default async function getForecast (city, unit = 'metric') {
+export default async function getForecast (city) {
   const url = new URL(
     'https://community-open-weather-map.p.rapidapi.com/weather'
   )
-  url.search = new URLSearchParams({ units: unit })
+  url.search = new URLSearchParams()
 
   console.log('city', city)
   if (city.name) {
@@ -12,12 +12,12 @@ export default async function getForecast (city, unit = 'metric') {
     url.searchParams.append('lon', city.lon)
   } else throw Error('Enter City!')
 
-  console.log(url.toString())
+  console.log(url.toString(), process.env.REACT_APP_RAPIDAPI_KEY)
 
   const requestOptions = {
     method: 'GET',
     headers: {
-      'x-rapidapi-key': '8de98afbfbmsh993ccd1707fecbdp1d1b87jsnafbde503a3f3',
+      'x-rapidapi-key': process.env.REACT_APP_RAPIDAPI_KEY,
       'x-rapidapi-host': 'community-open-weather-map.p.rapidapi.com',
       useQueryString: true
     }
@@ -26,6 +26,8 @@ export default async function getForecast (city, unit = 'metric') {
     .then(res => res.json())
     .then(res => {
       console.log('body', res)
+      res.main.metric = parseInt(res.main.temp - 276.15)
+      res.main.imperial = parseInt(((res.main.temp - 276.15) * 9) / 5 + 32)
       return res
     })
 }

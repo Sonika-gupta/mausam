@@ -1,23 +1,30 @@
 import { useState } from 'react'
 import './App.css'
-// import cityList from './city.list.json'
+import { createMuiTheme, ThemeProvider, Switch } from '@material-ui/core'
 import Forecast from './components/Forecast'
-import ToggleButton from '@material-ui/lab/ToggleButton'
-import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup'
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#084887'
+    },
+    secondary: {
+      main: '#def0ff'
+    }
+  }
+})
 
 function App () {
-  const [unit, setUnit] = useState('metric')
+  console.log(localStorage.getItem('unit'))
+  const [unit, setUnit] = useState(localStorage.getItem('unit') || 'metric')
   const [cities, setCities] = useState(
     JSON.parse(localStorage.getItem('cities') || [])
   )
-  // console.log(cityList.find(obj => obj.id === 833))
 
   function updateCities ({ coords: { latitude, longitude } }) {
-    /* const location = cityList.find(
-      obj => obj.coord.lat === latitude && obj.coord.lon === longitude
-    ) */
     setCities([...cities, { lat: latitude, lon: longitude }])
   }
+
   function openSearch (error) {
     console.log('fetch location failed', error)
     console.log('need to open search dialog')
@@ -26,23 +33,25 @@ function App () {
   if (!cities.length)
     navigator.geolocation.getCurrentPosition(updateCities, openSearch)
 
+  function handleUnitChange (e, isMetric) {
+    const updatedUnit = isMetric ? 'metric' : 'imperial'
+    localStorage.setItem('unit', updatedUnit)
+    setUnit(updatedUnit)
+  }
+
   return (
     <div className='App'>
-      <Forecast cities={cities} unit={unit}></Forecast>
-      <ToggleButtonGroup
-        value={unit}
-        size='small'
-        exclusive
-        onChange={(e, u) => setUnit(u)}
-        aria-label='unit'
-      >
-        <ToggleButton value='metric' aria-label='Celcius'>
-          C
-        </ToggleButton>
-        <ToggleButton value='imperial' aria-label='Fahrenheit'>
-          F
-        </ToggleButton>
-      </ToggleButtonGroup>
+      <ThemeProvider theme={theme}>
+        <Forecast cities={cities} unit={unit}></Forecast>
+        &deg;F
+        <Switch
+          checked={unit === 'metric'}
+          onChange={handleUnitChange}
+          name='unit'
+          color='primary'
+        />
+        &deg;C
+      </ThemeProvider>
     </div>
   )
 }

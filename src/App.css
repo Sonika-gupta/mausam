@@ -1,7 +1,7 @@
 :root {
-  --white : #fefefe,
-  --yale-blue: #084887,
-  --alice-blue: #def0ff
+  --white: #fefefe;
+  --yale-blue: #084887;
+  --alice-blue: #def0ff;
 }
 
 .App {
@@ -13,4 +13,3 @@ footer {
   bottom: 0;
   width: 100%;
 }
-
