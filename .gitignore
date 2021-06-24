@@ -1,8 +1,5 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-example-response.json
-xtra.js
-
 # dependencies
 /node_modules
 /.pnp
@@ -24,5 +21,7 @@ xtra.js
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-src/sample-data.json
 .gitignore
+city.list.json
+flow.md
+public/backgrounds/weather-backgrounds

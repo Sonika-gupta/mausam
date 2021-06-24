@@ -1,18 +1,20 @@
 import { useState, useEffect } from 'react'
 import { WeatherForecastAPI as data } from '../sample-data.json'
-import { Card, CardContent, Typography } from '@material-ui/core'
+import { Container, Card, CardContent, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-import getForecast from '../getForecast'
-/* const getForecast = loc => {
+import { getTime, getBackground } from '../utils'
+
+// import getForecast from '../getForecast'
+const getForecast = loc => {
   console.log('fetching forecasts')
-  return data
-} */
+  return data[loc.name.toLowerCase()] || data['london']
+}
 
 const useStyles = makeStyles({
-  root: {
-    maxWidth: '500px',
+  card: {
     display: 'flex',
-    margin: 'auto'
+    margin: 'auto 5px',
+    color: 'white'
   },
   city: {
     width: '70%',
@@ -23,14 +25,6 @@ const useStyles = makeStyles({
   }
 })
 
-function getTime ({ timezone }) {
-  const date = new Date(Date.now() + timezone * 1000)
-  return date.toLocaleTimeString('en-US', {
-    timeZone: 'UTC',
-    hour: '2-digit',
-    minute: '2-digit'
-  })
-}
 export default function Forecast ({ cities, unit }) {
   console.log('cities:', cities, 'unit', unit)
   const [forecasts, setForecasts] = useState([])
@@ -47,14 +41,17 @@ export default function Forecast ({ cities, unit }) {
     })()
   }, [cities, unit])
 
-  console.log('forecasts:', forecasts)
-
   const classes = useStyles()
   return (
-    <ul>
+    <Container maxWidth='sm'>
       {new Date().toUTCString()}
       {forecasts.map(forecast => (
-        <Card key={forecast.id} className={classes.root}>
+        <Card
+          key={forecast.id}
+          className={classes.card}
+          color='primary'
+          style={{ backgroundImage: getBackground(forecast.weather[0]) }}
+        >
           <CardContent>
             <img
               style={{ marginTop: '25%' }}
@@ -70,6 +67,6 @@ export default function Forecast ({ cities, unit }) {
           </CardContent>
         </Card>
       ))}
-    </ul>
+    </Container>
   )
 }
