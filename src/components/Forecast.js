@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
 import { Container, Card, CardContent, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-import { getTime, getBackground, calculateTemp } from '../utils'
+import { Description, CityDetail, Temperature } from './WeatherDetails'
+import { getTime, getBackground, calculateDetails } from '../utils'
 
 // import getForecast from '../getForecast'
 import { WeatherForecastAPI as data } from '../sample-data.json'
@@ -34,7 +35,7 @@ export default function Forecast ({ cities, unit }) {
     const weather = []
     ;(async function () {
       for (let city of cities) {
-        const x = calculateTemp(await getForecast(city))
+        const x = calculateDetails(await getForecast(city))
         console.log('----', x)
         weather.push(x)
       }
@@ -51,24 +52,16 @@ export default function Forecast ({ cities, unit }) {
           key={forecast.id}
           className={classes.card}
           color='primary'
-          style={{ backgroundImage: getBackground(forecast.weather[0]) }}
+          style={{ backgroundImage: forecast.background }}
         >
           <CardContent>
-            <img
-              style={{ marginTop: '25%' }}
-              src={`http://openweathermap.org/img/w/${forecast.weather[0].icon}.png`}
-              alt={forecast.weather[0].description}
-            ></img>
+            <Description weather={forecast.weather[0]} />
           </CardContent>
           <CardContent className={classes.city}>
-            <Typography variant='overline'>{getTime(forecast)}</Typography>
-            <Typography variant='h6'>{forecast.name}</Typography>
+            <CityDetail forecast={forecast} />
           </CardContent>
           <CardContent className={classes.temperature}>
-            <Typography variant='h3'>
-              {forecast.main[unit]}
-              &deg;
-            </Typography>
+            <Temperature forecast={forecast.main} unit={unit} />
           </CardContent>
         </Card>
       ))}

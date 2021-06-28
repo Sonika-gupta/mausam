@@ -14,7 +14,7 @@ const getBackground = ({ icon, main, description }) => {
 
   main = main.toLowerCase()
 
-  // TODO: GET SVG FOR EVERY PATH1
+  // TODO: GET gif FOR EVERY PATH1
   if (main === 'rain' || main === 'snow') image1 = `backgrounds/${main}.svg`
   else if (main === 'fog') image1 = 'backgrounds/fog.png'
   else if (main === 'thunderstorm' || main === 'tornado')
@@ -30,12 +30,14 @@ const getBackground = ({ icon, main, description }) => {
   return (image1 ? `url(${image1}),` : '') + `url(${image2})`
 }
 
-const calculateTemp = forecast => {
+const calculateDetails = forecast => {
   forecast.main.metric = parseInt(forecast.main.temp - 276.15)
   forecast.main.imperial = parseInt(
     ((forecast.main.temp - 276.15) * 9) / 5 + 32
   )
+  forecast.time = getTime(forecast)
+  forecast.background = getBackground(forecast.weather[0])
   return forecast
 }
 
-export { getTime, getBackground, calculateTemp }
+export { getTime, getBackground, calculateDetails }
