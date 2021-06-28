@@ -26,8 +26,6 @@ export default async function getForecast (city) {
     .then(res => res.json())
     .then(res => {
       console.log('body', res)
-      res.main.metric = parseInt(res.main.temp - 276.15)
-      res.main.imperial = parseInt(((res.main.temp - 276.15) * 9) / 5 + 32)
       return res
     })
 }

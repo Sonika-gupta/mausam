@@ -1,93 +1,133 @@
 {
   "WeatherForecastAPI": {
     "london": {
-      "timezone": 3600,
-      "id": 2643743,
-      "name": "London",
-      "cod": 200,
       "coord": {
-        "lon": -0.13,
-        "lat": 51.51
+        "lon": -0.1257,
+        "lat": 51.5085
       },
       "weather": [
         {
-          "id": 741,
-          "main": "Fog",
-          "description": "fog",
-          "icon": "50n"
+          "id": 803,
+          "main": "Clouds",
+          "description": "scattered clouds",
+          "icon": "04d"
         }
       ],
       "base": "stations",
       "main": {
-        "temp": 284.04,
-        "pressure": 1011,
-        "humidity": 93,
-        "tempmin": 280.93,
-        "tempmax": 287.04,
-        "metric": 7,
-        "imperial": 46
+        "temp": 287.58,
+        "feels_like": 287.3,
+        "temp_min": 286.48,
+        "temp_max": 288.71,
+        "pressure": 1017,
+        "humidity": 85
       },
       "visibility": 10000,
       "wind": {
-        "speed": 1.5
+        "speed": 3.6,
+        "deg": 250
       },
       "clouds": {
-        "all": 20
+        "all": 75
       },
-      "dt": 1570234102,
+      "dt": 1624601181,
       "sys": {
-        "type": 1,
-        "id": 1417,
-        "message": 0.0102,
+        "type": 2,
+        "id": 2019646,
         "country": "GB",
-        "sunrise": 1570255614,
-        "sunset": 1570296659
-      }
+        "sunrise": 1624592659,
+        "sunset": 1624652510
+      },
+      "timezone": 3600,
+      "id": 2643743,
+      "name": "London",
+      "cod": 200
     },
     "mountain view": {
       "coord": {
-        "lon": -122.08,
-        "lat": 37.39
+        "lon": -122.0838,
+        "lat": 37.3861
       },
       "weather": [
         {
           "id": 800,
           "main": "Clear",
           "description": "clear sky",
-          "icon": "01d"
+          "icon": "01n"
         }
       ],
       "base": "stations",
       "main": {
-        "temp": 282.55,
-        "feels_like": 281.86,
-        "temp_min": 280.37,
-        "temp_max": 284.26,
-        "pressure": 1023,
-        "humidity": 100,
-        "metric": 6,
-        "imperial": 43
+        "temp": 288.3,
+        "feels_like": 287.96,
+        "temp_min": 285.54,
+        "temp_max": 290.22,
+        "pressure": 1016,
+        "humidity": 80
       },
-      "visibility": 16093,
+      "visibility": 10000,
       "wind": {
-        "speed": 1.5,
-        "deg": 350
+        "speed": 2.24,
+        "deg": 355,
+        "gust": 4.47
       },
       "clouds": {
         "all": 1
       },
-      "dt": 1560350645,
+      "dt": 1624601727,
       "sys": {
-        "type": 1,
-        "id": 5122,
-        "message": 0.0139,
+        "type": 2,
+        "id": 2003994,
         "country": "US",
-        "sunrise": 1560343627,
-        "sunset": 1560396563
+        "sunrise": 1624538922,
+        "sunset": 1624591972
       },
       "timezone": -25200,
-      "id": 420006353,
+      "id": 5375480,
       "name": "Mountain View",
+      "cod": 200
+    },
+    "delhi": {
+      "coord": {
+        "lon": 77.2167,
+        "lat": 28.6667
+      },
+      "weather": [
+        {
+          "id": 721,
+          "main": "Haze",
+          "description": "haze",
+          "icon": "50d"
+        }
+      ],
+      "base": "stations",
+      "main": {
+        "temp": 310.2,
+        "feels_like": 311.59,
+        "temp_min": 310.2,
+        "temp_max": 310.2,
+        "pressure": 1002,
+        "humidity": 32
+      },
+      "visibility": 4500,
+      "wind": {
+        "speed": 2.57,
+        "deg": 290
+      },
+      "clouds": {
+        "all": 1
+      },
+      "dt": 1624601209,
+      "sys": {
+        "type": 1,
+        "id": 9165,
+        "country": "IN",
+        "sunrise": 1624578882,
+        "sunset": 1624629158
+      },
+      "timezone": 19800,
+      "id": 1273294,
+      "name": "Delhi",
       "cod": 200
     }
   },

@@ -1,6 +1,6 @@
 html {
   height: 100%;
-  background: var(--alice-blue);
+  background: linear-gradient(#3981bf, #d5e5f2);
 }
 body {
   margin: 0;

@@ -1,20 +1,19 @@
 import { useState, useEffect } from 'react'
 import { Container, Card, CardContent, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-import { getTime, getBackground } from '../utils'
+import { getTime, getBackground, calculateTemp } from '../utils'
 
-import getForecast from '../getForecast'
-/* import { WeatherForecastAPI as data } from '../sample-data.json'
+// import getForecast from '../getForecast'
+import { WeatherForecastAPI as data } from '../sample-data.json'
 const getForecast = loc => {
   console.log('fetching forecasts')
   return data[loc.name.toLowerCase()] || data['london']
 }
- */
+
 const useStyles = makeStyles({
   card: {
     display: 'flex',
     margin: '5px auto',
-    color: 'white',
     backgroundPosition: 'center',
     backgroundSize: 'cover'
   },
@@ -22,7 +21,7 @@ const useStyles = makeStyles({
     width: '70%',
     textAlign: 'left'
   },
-  temp: {
+  temperature: {
     margin: '5px'
   }
 })
@@ -35,15 +34,15 @@ export default function Forecast ({ cities, unit }) {
     const weather = []
     ;(async function () {
       for (let city of cities) {
-        const x = await getForecast(city)
+        const x = calculateTemp(await getForecast(city))
         console.log('----', x)
         weather.push(x)
       }
       setForecasts(weather)
-      console.log(forecasts)
     })()
   }, [cities, unit])
 
+  console.log(forecasts)
   const classes = useStyles()
   return (
     <Container maxWidth='md'>
@@ -65,7 +64,7 @@ export default function Forecast ({ cities, unit }) {
             <Typography variant='overline'>{getTime(forecast)}</Typography>
             <Typography variant='h6'>{forecast.name}</Typography>
           </CardContent>
-          <CardContent className={classes.temp}>
+          <CardContent className={classes.temperature}>
             <Typography variant='h3'>
               {forecast.main[unit]}
               &deg;

@@ -7,19 +7,35 @@ const getTime = ({ timezone }) => {
   })
 }
 
-const getBackground = ({ icon, main }) => {
-  let path1 = ''
-  const path2 =
-    'backgrounds/' + (icon[2] === 'd' ? 'day' : 'night') + '/clear.jpg'
+const getBackground = ({ icon, main, description }) => {
+  const time = icon[2] === 'd' ? 'day' : 'night'
+  let image1 = ''
+  const image2 = 'backgrounds/' + time + '/clear.jpg'
 
   main = main.toLowerCase()
 
-  if (main === 'rain' || main === 'snow') path1 = `backgrounds/${main}.svg`
-  else if (main === 'fog') path1 = 'backgrounds/fog.png'
+  // TODO: GET SVG FOR EVERY PATH1
+  if (main === 'rain' || main === 'snow') image1 = `backgrounds/${main}.svg`
+  else if (main === 'fog') image1 = 'backgrounds/fog.png'
   else if (main === 'thunderstorm' || main === 'tornado')
-    path1 = `backgrounds/${main}.jpg`
+    image1 = `backgrounds/${main}.jpg`
+  else if (main === 'clouds') {
+    image1 =
+      description === 'scattered clouds'
+        ? `backgrounds/${time}/${main}/scattered.gif`
+        : `backgrounds/${time}/${main}/${description.split(' ')[0]}.jpg`
+  }
+  console.log(image1, image2)
 
-  return `url(${path1}), url(${path2})`
+  return (image1 ? `url(${image1}),` : '') + `url(${image2})`
 }
 
-export { getTime, getBackground }
+const calculateTemp = forecast => {
+  forecast.main.metric = parseInt(forecast.main.temp - 276.15)
+  forecast.main.imperial = parseInt(
+    ((forecast.main.temp - 276.15) * 9) / 5 + 32
+  )
+  return forecast
+}
+
+export { getTime, getBackground, calculateTemp }
