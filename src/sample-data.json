@@ -243,5 +243,282 @@
         "description": "...HEAT ADVISORY REMAINS IN EFFECT FROM 1 PM THIS AFTERNOON TO\n8 PM CDT THIS EVENING...\n* WHAT...Heat index values of 105 to 109 degrees expected.\n* WHERE...Creek, Okfuskee, Okmulgee, McIntosh, Pittsburg,\nLatimer, Pushmataha, and Choctaw Counties.\n* WHEN...From 1 PM to 8 PM CDT Thursday.\n* IMPACTS...The combination of hot temperatures and high\nhumidity will combine to create a dangerous situation in which\nheat illnesses are possible."
       }
     ]
-  }
+  },
+  "del": [
+    {
+      "id": "3369157",
+      "geonameId": 3369157,
+      "type": "CITY",
+      "name": "Cape Town",
+      "population": 3433441,
+      "elevation": 25,
+      "timezoneId": "Africa/Johannesburg",
+      "country": {
+        "id": "ZA",
+        "geonameId": 953987,
+        "name": "South Africa"
+      },
+      "adminDivision1": {
+        "id": "ZA.11",
+        "geonameId": 1085599,
+        "name": "Western Cape"
+      },
+      "adminDivision2": {
+        "id": "ZA.11.CPT",
+        "geonameId": 8334583,
+        "name": "City of Cape Town"
+      },
+      "score": 12.53573,
+      "coordinates": {
+        "latitude": -33.9258,
+        "longitude": 18.4232
+      }
+    },
+    {
+      "id": "3439101",
+      "geonameId": 3439101,
+      "type": "CITY",
+      "name": "Ciudad del Este",
+      "population": 320782,
+      "elevation": 186,
+      "timezoneId": "America/Asuncion",
+      "country": {
+        "id": "PY",
+        "geonameId": 3437598,
+        "name": "Paraguay"
+      },
+      "adminDivision1": {
+        "id": "PY.01",
+        "geonameId": 3439440,
+        "name": "Departamento del Alto Paraná"
+      },
+      "adminDivision2": {
+        "id": "PY.01.1001",
+        "geonameId": 11840124,
+        "name": "Ciudad Del Este"
+      },
+      "score": 12.506211,
+      "coordinates": {
+        "latitude": -25.5097,
+        "longitude": -54.6111
+      }
+    },
+    {
+      "id": "1273294",
+      "geonameId": 1273294,
+      "type": "CITY",
+      "name": "Delhi",
+      "population": 10927986,
+      "elevation": 227,
+      "timezoneId": "Asia/Kolkata",
+      "country": {
+        "id": "IN",
+        "geonameId": 1269750,
+        "name": "India"
+      },
+      "adminDivision1": {
+        "id": "IN.07",
+        "geonameId": 1273293,
+        "name": "National Capital Territory of Delhi"
+      },
+      "score": 12.03854,
+      "coordinates": {
+        "latitude": 28.652,
+        "longitude": 77.2315
+      }
+    },
+    {
+      "id": "5368361",
+      "geonameId": 5368361,
+      "type": "CITY",
+      "name": "Los Angeles",
+      "population": 3971883,
+      "elevation": 89,
+      "timezoneId": "America/Los_Angeles",
+      "country": {
+        "id": "US",
+        "geonameId": 6252001,
+        "name": "United States of America"
+      },
+      "adminDivision1": {
+        "id": "US.CA",
+        "geonameId": 5332921,
+        "name": "California"
+      },
+      "adminDivision2": {
+        "id": "US.CA.037",
+        "geonameId": 5368381,
+        "name": "Los Angeles"
+      },
+      "score": 11.598997,
+      "coordinates": {
+        "latitude": 34.0522,
+        "longitude": -118.244
+      }
+    },
+    {
+      "id": "1261481",
+      "geonameId": 1261481,
+      "type": "CITY",
+      "name": "New Delhi",
+      "population": 317797,
+      "elevation": 212,
+      "timezoneId": "Asia/Kolkata",
+      "country": {
+        "id": "IN",
+        "geonameId": 1269750,
+        "name": "India"
+      },
+      "adminDivision1": {
+        "id": "IN.07",
+        "geonameId": 1273293,
+        "name": "National Capital Territory of Delhi"
+      },
+      "adminDivision2": {
+        "id": "IN.07.094",
+        "geonameId": 8347332,
+        "name": "New Delhi"
+      },
+      "score": 11.5021515,
+      "coordinates": {
+        "latitude": 28.6358,
+        "longitude": 77.2244
+      }
+    },
+    {
+      "id": "3941584",
+      "geonameId": 3941584,
+      "type": "CITY",
+      "name": "Cusco",
+      "population": 312140,
+      "elevation": 3369,
+      "timezoneId": "America/Lima",
+      "country": {
+        "id": "PE",
+        "geonameId": 3932488,
+        "name": "Peru"
+      },
+      "adminDivision1": {
+        "id": "PE.08",
+        "geonameId": 3941583,
+        "name": "Cusco"
+      },
+      "adminDivision2": {
+        "id": "PE.08.0801",
+        "geonameId": 3941582,
+        "name": "Provincia de Cusco"
+      },
+      "score": 11.49435,
+      "coordinates": {
+        "latitude": -13.5226,
+        "longitude": -71.9673
+      }
+    },
+    {
+      "id": "3544091",
+      "geonameId": 3544091,
+      "type": "CITY",
+      "name": "Pinar del Río",
+      "population": 186990,
+      "elevation": 55,
+      "timezoneId": "America/Havana",
+      "country": {
+        "id": "CU",
+        "geonameId": 3562981,
+        "name": "Cuba"
+      },
+      "adminDivision1": {
+        "id": "CU.01",
+        "geonameId": 3544088,
+        "name": "Provincia de Pinar del Río"
+      },
+      "adminDivision2": {
+        "id": "CU.01.2108",
+        "geonameId": 3544089,
+        "name": "Municipio de Pinar del Río"
+      },
+      "score": 11.27182,
+      "coordinates": {
+        "latitude": 22.4167,
+        "longitude": -83.6967
+      }
+    },
+    {
+      "id": "3526683",
+      "geonameId": 3526683,
+      "type": "CITY",
+      "name": "Iztapalapa",
+      "population": 1815786,
+      "elevation": 2238,
+      "timezoneId": "America/Mexico_City",
+      "country": {
+        "id": "MX",
+        "geonameId": 3996063,
+        "name": "Mexico"
+      },
+      "adminDivision1": {
+        "id": "MX.09",
+        "geonameId": 3527646,
+        "name": "Mexico City"
+      },
+      "adminDivision2": {
+        "id": "MX.09.007",
+        "geonameId": 8379455,
+        "name": "Iztapalapa Borough"
+      },
+      "score": 11.259065,
+      "coordinates": {
+        "latitude": 19.3553,
+        "longitude": -99.0622
+      }
+    },
+    {
+      "id": "3435910",
+      "geonameId": 3435910,
+      "type": "CITY",
+      "name": "Buenos Aires",
+      "population": 13076300,
+      "elevation": 31,
+      "timezoneId": "America/Argentina/Buenos_Aires",
+      "country": {
+        "id": "AR",
+        "geonameId": 3865483,
+        "name": "Argentina"
+      },
+      "adminDivision1": {
+        "id": "AR.07",
+        "geonameId": 3433955,
+        "name": "Buenos Aires F.D."
+      },
+      "score": 11.116486,
+      "coordinates": {
+        "latitude": -34.6132,
+        "longitude": -58.3772
+      }
+    },
+    {
+      "id": "3530597",
+      "geonameId": 3530597,
+      "type": "CITY",
+      "name": "Mexico City",
+      "population": 12294193,
+      "elevation": 2240,
+      "timezoneId": "America/Mexico_City",
+      "country": {
+        "id": "MX",
+        "geonameId": 3996063,
+        "name": "Mexico"
+      },
+      "adminDivision1": {
+        "id": "MX.09",
+        "geonameId": 3527646,
+        "name": "Mexico City"
+      },
+      "score": 11.089701,
+      "coordinates": {
+        "latitude": 19.4285,
+        "longitude": -99.1277
+      }
+    }
+  ]
 }
