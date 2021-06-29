@@ -1,33 +1,55 @@
-/* eslint-disable no-use-before-define */
 import { useState } from 'react'
-import TextField from '@material-ui/core/TextField'
+import {
+  Dialog,
+  // DialogActions,
+  DialogContent,
+  DialogContentText,
+  TextField
+} from '@material-ui/core'
 import Autocomplete from '@material-ui/lab/Autocomplete'
+// import getSearchOptions from '../api/getSearchOptions'
 
-export default function Search () {
+import { del as data } from '../sample-data.json'
+function getSearchOptions (query) {
+  console.log(query)
+  return data
+}
+
+export default function Search ({ open, onClose, onSelect }) {
   const [options, setOptions] = useState([])
+  let value = ''
   function updateOptions (e) {
     console.log(e.target.value)
-    /* setOptions(
-      cityList
-        .filter(cities => cities.name.includes(e.target.value))
-        .map(el => el.name)
-    ) */
-    setOptions([])
+    setOptions(getSearchOptions(e.target.value))
     console.log(options)
   }
+
+  function handleClose () {
+    setOptions([])
+    onClose()
+  }
+
   return (
-    <div style={{ width: 300 }}>
-      <Autocomplete
-        options={options}
-        renderInput={params => (
-          <TextField
-            {...params}
-            onChange={updateOptions}
-            margin='normal'
-            variant='outlined'
-          />
-        )}
-      />
-    </div>
+    <Dialog open={open} onClose={handleClose} maxWidth='sm' fullWidth>
+      <DialogContent>
+        <DialogContentText variant='subtitle2'>
+          Enter City Name
+        </DialogContentText>
+        <Autocomplete
+          options={options}
+          getOptionLabel={el => el && el.name}
+          value={value}
+          onChange={(e, newValue) => onSelect(newValue)}
+          renderInput={params => (
+            <TextField
+              {...params}
+              style={{ width: '100%' }}
+              onChange={updateOptions}
+              margin='normal'
+            />
+          )}
+        />
+      </DialogContent>
+    </Dialog>
   )
 }

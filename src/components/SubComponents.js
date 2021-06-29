@@ -11,7 +11,6 @@ function Description ({ weather }) {
 }
 
 function CityDetail ({ forecast }) {
-  console.log(forecast)
   return (
     <>
       <Typography variant='overline'>{forecast.time}</Typography>

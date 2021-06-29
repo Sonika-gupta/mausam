@@ -20,8 +20,6 @@ const Transition = forwardRef(function Transition (props, ref) {
   return <Zoom ref={ref} {...props} />
 })
 export default function DetailedWeather ({ open, forecast, onClose }) {
-  const detailedForecast = getDetailedForecast(forecast.name)
-
   const classes = makeStyles({
     dialog: {
       backgroundImage: forecast.background,
@@ -54,9 +52,13 @@ export default function DetailedWeather ({ open, forecast, onClose }) {
         </DialogActions>
         <Grid container spacing={2} style={{ height: '100%' }}>
           <Grid item xs={12} className={classes.grid}>
-            <Paper>
-              <CityDetail forecast={forecast} />
-            </Paper>
+            {forecast && (
+              <Paper>
+                <CityDetail forecast={forecast} />
+                <Temperature temperature={forecast.main.temp} />
+                <Description weather={forecast.weather[0]} />
+              </Paper>
+            )}
           </Grid>
         </Grid>
       </DialogContent>
