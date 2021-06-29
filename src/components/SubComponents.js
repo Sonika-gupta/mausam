@@ -11,6 +11,7 @@ function Description ({ weather }) {
 }
 
 function CityDetail ({ forecast }) {
+  console.log(forecast)
   return (
     <>
       <Typography variant='overline'>{forecast.time}</Typography>
@@ -19,10 +20,10 @@ function CityDetail ({ forecast }) {
   )
 }
 
-function Temperature ({ forecast, unit }) {
+function Temperature ({ temperature }) {
   return (
     <Typography variant='h3'>
-      {forecast[unit]}
+      {temperature}
       &deg;
     </Typography>
   )

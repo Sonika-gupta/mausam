@@ -1,7 +1,5 @@
-:root {
-  --white: #fefefe;
-  --yale-blue: #084887;
-  --alice-blue: #def0ff;
+* {
+  background-size: cover;
 }
 
 .App {

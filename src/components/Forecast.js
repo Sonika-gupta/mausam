@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react'
-import { Container, Card, CardContent, Typography } from '@material-ui/core'
+import { Container, Card, CardActionArea, CardContent } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-import { Description, CityDetail, Temperature } from './WeatherDetails'
-import { getTime, getBackground, calculateDetails } from '../utils'
+import { Description, CityDetail, Temperature } from './SubComponents'
+import DetailedWeather from './DetailedWeather'
+import { calculateDetails } from '../utils'
 
 // import getForecast from '../getForecast'
 import { WeatherForecastAPI as data } from '../sample-data.json'
@@ -13,10 +14,10 @@ const getForecast = loc => {
 
 const useStyles = makeStyles({
   card: {
-    display: 'flex',
-    margin: '5px auto',
+    margin:
+      '5px auto' /* ,
     backgroundPosition: 'center',
-    backgroundSize: 'cover'
+    backgroundSize: 'cover' */
   },
   city: {
     width: '70%',
@@ -30,41 +31,58 @@ const useStyles = makeStyles({
 export default function Forecast ({ cities, unit }) {
   console.log('cities:', cities, 'unit', unit)
   const [forecasts, setForecasts] = useState([])
+  const [open, setOpen] = useState(false)
+  const [openedForecast, setOpenedForecast] = useState({})
 
   useEffect(() => {
     const weather = []
     ;(async function () {
       for (let city of cities) {
-        const x = calculateDetails(await getForecast(city))
-        console.log('----', x)
-        weather.push(x)
+        weather.push(calculateDetails(await getForecast(city)))
       }
       setForecasts(weather)
     })()
   }, [cities, unit])
 
   console.log(forecasts)
+
+  function handleClickOpen (forecast) {
+    setOpen(true)
+    setOpenedForecast(forecast)
+  }
   const classes = useStyles()
   return (
-    <Container maxWidth='md'>
-      {forecasts.map(forecast => (
-        <Card
-          key={forecast.id}
-          className={classes.card}
-          color='primary'
-          style={{ backgroundImage: forecast.background }}
-        >
-          <CardContent>
-            <Description weather={forecast.weather[0]} />
-          </CardContent>
-          <CardContent className={classes.city}>
-            <CityDetail forecast={forecast} />
-          </CardContent>
-          <CardContent className={classes.temperature}>
-            <Temperature forecast={forecast.main} unit={unit} />
-          </CardContent>
-        </Card>
-      ))}
-    </Container>
+    <>
+      <Container maxWidth='md'>
+        {forecasts.map(forecast => (
+          <Card
+            key={forecast.id}
+            className={classes.card}
+            color='primary'
+            style={{ backgroundImage: forecast.background }}
+          >
+            <CardActionArea
+              style={{ display: 'flex' }}
+              onClick={() => handleClickOpen(forecast)}
+            >
+              <CardContent>
+                <Description weather={forecast.weather[0]} />
+              </CardContent>
+              <CardContent className={classes.city}>
+                <CityDetail forecast={forecast} />
+              </CardContent>
+              <CardContent className={classes.temperature}>
+                <Temperature temperature={forecast.main[unit]} />
+              </CardContent>
+            </CardActionArea>
+          </Card>
+        ))}
+      </Container>
+      <DetailedWeather
+        open={open}
+        forecast={openedForecast}
+        onClose={() => setOpen(false)}
+      />
+    </>
   )
 }

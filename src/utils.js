@@ -37,6 +37,7 @@ const calculateDetails = forecast => {
   )
   forecast.time = getTime(forecast)
   forecast.background = getBackground(forecast.weather[0])
+  console.log(forecast)
   return forecast
 }
 
