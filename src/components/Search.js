@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {
   Dialog,
   // DialogActions,
@@ -7,22 +7,46 @@ import {
   TextField
 } from '@material-ui/core'
 import Autocomplete from '@material-ui/lab/Autocomplete'
-// import getSearchOptions from '../api/getSearchOptions'
+import { getSearchOptions } from '../api/places'
 
-import { del as data } from '../sample-data.json'
-function getSearchOptions (query) {
-  console.log(query)
-  return data
-}
+/* function useDebounce (value, delay) {
+  const [debouncedValue, setDebouncedValue] = useState(value)
+  useEffect(() => {
+    const handler = setTimeout(() => setDebouncedValue(value), delay)
+    return () => clearTimeout(handler)
+  }, [value, delay])
+  return debouncedValue
+} */
 
 export default function Search ({ open, onClose, onSelect }) {
   const [options, setOptions] = useState([])
-  let value = ''
-  function updateOptions (e) {
-    console.log(e.target.value)
-    setOptions(getSearchOptions(e.target.value))
+  const [value, setValue] = useState('')
+  const [isSearching, setIsSearching] = useState(false)
+  /*   const [debouncedQuery, setDebouncedQuery] = useDebounce(value, 500)
+  useEffect(() => {
+    if (debouncedQuery) {
+      setIsSearching(true)
+      getSearchOptions(debouncedQuery).then(result => {
+        setIsSearching(false)
+        setOptions(result)
+      })
+    } else {
+      setOptions([])
+      setIsSearching(false)
+    }
     console.log(options)
-  }
+  }, [debouncedQuery]) */
+
+  useEffect(() => {
+    if (!isSearching && value) {
+      setIsSearching(true)
+      getSearchOptions(value).then(result => {
+        console.log(result)
+        setIsSearching(false)
+        setOptions(result)
+      })
+    }
+  }, [value])
 
   function handleClose () {
     setOptions([])
@@ -38,14 +62,18 @@ export default function Search ({ open, onClose, onSelect }) {
         <Autocomplete
           options={options}
           getOptionLabel={el => el && el.name}
-          value={value}
-          onChange={(e, newValue) => onSelect(newValue)}
+          onChange={(e, newValue) => {
+            onClose()
+            onSelect(newValue)
+          }}
+          onInputChange={e => setValue(e.target.value)}
+          filterOptions={(options, state) => options}
           renderInput={params => (
             <TextField
               {...params}
               style={{ width: '100%' }}
-              onChange={updateOptions}
               margin='normal'
+              InputProps={{ ...params.InputProps, type: 'search' }}
             />
           )}
         />

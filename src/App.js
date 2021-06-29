@@ -35,6 +35,7 @@ function App () {
   const [cities, setCities] = useState(
     JSON.parse(localStorage.getItem('cities')) || []
   )
+  console.log(cities)
   const [search, setSearch] = useState(false)
   const [open, setOpen] = useState(false)
   const [selectedForecast, setSelectedForecast] = useState('')
@@ -59,13 +60,16 @@ function App () {
   }
 
   function handleCitySelection (newCity) {
-    if (cities.indexOf(city => city.id === newCity.id) < 0)
+    console.log('Selected city:', newCity)
+    if (newCity && cities.indexOf(city => city.id === newCity.id) < 0)
       updateCities(newCity)
+    viewDetailedWeather()
   }
 
   function viewDetailedWeather (forecast) {
     setOpen(true)
-    setSelectedForecast(forecast)
+    console.log(selectedForecast)
+    if (forecast) setSelectedForecast(forecast)
   }
 
   return (
@@ -78,6 +82,7 @@ function App () {
               city={city}
               unit={unit}
               onSelectForecast={viewDetailedWeather}
+              setSelectedForecast={setSelectedForecast}
             ></Forecast>
           ))}
         </Container>

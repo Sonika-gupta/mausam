@@ -24,13 +24,19 @@ const useStyles = makeStyles({
   }
 })
 
-export default function Forecast ({ city, unit, onSelectForecast }) {
+export default function Forecast ({
+  city,
+  unit,
+  onSelectForecast,
+  setSelectedForecast
+}) {
   console.log('Loaded city and unit')
   const [forecast, setForecast] = useState('')
 
   useEffect(() => {
     ;(async () => {
       setForecast(calculateDetails(await getForecast(city)))
+      setSelectedForecast(forecast)
     })()
   }, [city])
   console.log('Loaded forecast')
