@@ -1,15 +1,20 @@
 import { useState } from 'react'
+
 import {
-  createMuiTheme,
-  ThemeProvider,
   Container,
+  createMuiTheme,
+  IconButton,
   Switch,
-  IconButton
+  ThemeProvider
 } from '@material-ui/core'
 import SearchIcon from '@material-ui/icons/Search'
+
+import DetailedWeather from './components/DetailedWeather'
 import Forecast from './components/Forecast'
 import Search from './components/Search'
-import DetailedWeather from './components/DetailedWeather'
+
+import { getCity } from './api/places'
+
 import './App.css'
 
 const theme = createMuiTheme({
@@ -21,35 +26,41 @@ const theme = createMuiTheme({
     secondary: {
       main: '#def0ff'
     }
-  }
+  },
+  spacing: 2
 })
 
 function App () {
   const [unit, setUnit] = useState(localStorage.getItem('unit') || 'metric')
   const [cities, setCities] = useState(
-    JSON.parse(localStorage.getItem('cities') || [])
+    JSON.parse(localStorage.getItem('cities')) || []
   )
   const [search, setSearch] = useState(false)
   const [open, setOpen] = useState(false)
   const [selectedForecast, setSelectedForecast] = useState('')
 
-  if (!cities.length)
-    navigator.geolocation.getCurrentPosition(updateCities, () =>
+  const updateUnit = unit => {
+    localStorage.setItem('unit', unit)
+    setUnit(unit)
+  }
+
+  const updateCities = city => {
+    localStorage.setItem('cities', JSON.stringify([...cities, city]))
+    setCities([...cities, city])
+  }
+
+  const addCurrentLocation = async ({ coords: { latitude, longitude } }) =>
+    updateCities(await getCity({ latitude, longitude }))
+
+  if (!cities.length) {
+    navigator.geolocation.getCurrentPosition(addCurrentLocation, () =>
       setSearch(true)
     )
-
-  function updateCities ({ coords: { latitude, longitude } }) {
-    setCities([...cities, { lat: latitude, lon: longitude }])
   }
 
-  function handleUnitChange (e, isMetric) {
-    const updatedUnit = isMetric ? 'metric' : 'imperial'
-    localStorage.setItem('unit', updatedUnit)
-    setUnit(updatedUnit)
-  }
-
-  function handleCitySelection (city) {
-    setCities([...cities, city])
+  function handleCitySelection (newCity) {
+    if (cities.indexOf(city => city.id === newCity.id) < 0)
+      updateCities(newCity)
   }
 
   function viewDetailedWeather (forecast) {
@@ -63,9 +74,10 @@ function App () {
         <Container maxWidth='md'>
           {cities.map(city => (
             <Forecast
+              key={city.id}
               city={city}
               unit={unit}
-              onSelect={viewDetailedWeather}
+              onSelectForecast={viewDetailedWeather}
             ></Forecast>
           ))}
         </Container>
@@ -74,7 +86,9 @@ function App () {
             &deg;F
             <Switch
               checked={unit === 'metric'}
-              onChange={handleUnitChange}
+              onChange={(e, isMetric) =>
+                updateUnit(isMetric ? 'metric' : 'imperial')
+              }
               name='unit'
               color='primary'
             />

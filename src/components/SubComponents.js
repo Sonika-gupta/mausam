@@ -14,7 +14,7 @@ function CityDetail ({ forecast }) {
   return (
     <>
       <Typography variant='overline'>{forecast.time}</Typography>
-      <Typography variant='h6'>{forecast.name}</Typography>
+      <Typography variant='h5'>{forecast.name}</Typography>
     </>
   )
 }

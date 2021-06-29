@@ -11,29 +11,17 @@ import {
 import { makeStyles } from '@material-ui/core'
 import { Description, CityDetail, Temperature } from './SubComponents'
 
-import { OneCallAPI } from '../sample-data.json'
-function getDetailedForecast (city) {
-  return OneCallAPI
-}
-
 const Transition = forwardRef(function Transition (props, ref) {
   return <Zoom ref={ref} {...props} />
 })
-export default function DetailedWeather ({ open, forecast, onClose }) {
+export default function DetailedWeather ({ open, onClose, forecast }) {
   const classes = makeStyles({
     dialog: {
-      backgroundImage: forecast.background,
-      '&:after': {
-        content: '""',
-        background: 'url(...)',
-        position: 'absolute',
-        top: '0',
-        left: '0',
-        height: ' 100%',
-        width: ' 100%',
-        display: 'block',
-        opacity: '0.5'
-      }
+      backgroundImage: forecast.background
+    },
+    dialogPaper: {
+      minHeight: '90vh',
+      maxHeight: '80vh'
     }
   })()
   return (
@@ -41,8 +29,9 @@ export default function DetailedWeather ({ open, forecast, onClose }) {
       open={open}
       onClose={onClose}
       fullWidth
-      maxWidth='xl'
+      maxWidth='lg'
       TransitionComponent={Transition}
+      classes={{ paper: classes.dialogPaper }}
     >
       <DialogContent className={classes.dialog}>
         <DialogActions>
@@ -53,7 +42,10 @@ export default function DetailedWeather ({ open, forecast, onClose }) {
         <Grid container spacing={2} style={{ height: '100%' }}>
           <Grid item xs={12} className={classes.grid}>
             {forecast && (
-              <Paper>
+              <Paper
+                variant='outlined'
+                style={{ background: 'transparent', border: 'none' }}
+              >
                 <CityDetail forecast={forecast} />
                 <Temperature temperature={forecast.main.temp} />
                 <Description weather={forecast.weather[0]} />

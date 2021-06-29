@@ -25,7 +25,6 @@ const getBackground = ({ icon, main, description }) => {
         ? `backgrounds/${time}/${main}/scattered.gif`
         : `backgrounds/${time}/${main}/${description.split(' ')[0]}.jpg`
   }
-  console.log(image1, image2)
 
   return (image1 ? `url(${image1}),` : '') + `url(${image2})`
 }
@@ -37,7 +36,6 @@ const calculateDetails = forecast => {
   )
   forecast.time = getTime(forecast)
   forecast.background = getBackground(forecast.weather[0])
-  console.log(forecast)
   return forecast
 }
 

@@ -3,11 +3,11 @@ import { Card, CardActionArea, CardContent } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { Description, CityDetail, Temperature } from './SubComponents'
 import { calculateDetails } from '../utils'
-// import getForecast from '../api/getForecast'
+// import getForecast from '../api/weather'
 
 import { WeatherForecastAPI as data } from '../sample-data.json'
 const getForecast = loc => {
-  console.log('fetching forecast')
+  console.log('fetching forecast', loc)
   return data[loc.name.toLowerCase()] || data['london']
 }
 
@@ -24,16 +24,16 @@ const useStyles = makeStyles({
   }
 })
 
-export default function Forecast ({ city, unit, onSelect }) {
-  console.log('city:', city, 'unit', unit)
+export default function Forecast ({ city, unit, onSelectForecast }) {
+  console.log('Loaded city and unit')
   const [forecast, setForecast] = useState('')
 
   useEffect(() => {
-    ;(async function () {
+    ;(async () => {
       setForecast(calculateDetails(await getForecast(city)))
     })()
-    console.log(forecast)
   }, [city])
+  console.log('Loaded forecast')
 
   const classes = useStyles()
   return (
@@ -46,7 +46,7 @@ export default function Forecast ({ city, unit, onSelect }) {
         >
           <CardActionArea
             style={{ display: 'flex' }}
-            onClick={() => onSelect(forecast)}
+            onClick={() => onSelectForecast(forecast)}
           >
             <CardContent>
               <Description weather={forecast.weather[0]} />
