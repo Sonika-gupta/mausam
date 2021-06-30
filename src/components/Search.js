@@ -1,13 +1,17 @@
 import { useState, useEffect } from 'react'
 import {
   Dialog,
-  // DialogActions,
   DialogContent,
   DialogContentText,
   TextField
 } from '@material-ui/core'
 import Autocomplete from '@material-ui/lab/Autocomplete'
 import { getSearchOptions } from '../api/places'
+
+/* import { del as data } from '../sample-data.json'
+async function getSearchOptions () {
+  return data
+} */
 
 /* function useDebounce (value, delay) {
   const [debouncedValue, setDebouncedValue] = useState(value)
@@ -63,8 +67,8 @@ export default function Search ({ open, onClose, onSelect }) {
           options={options}
           getOptionLabel={el => el && el.name}
           onChange={(e, newValue) => {
-            onClose()
             onSelect(newValue)
+            onClose()
           }}
           onInputChange={e => setValue(e.target.value)}
           filterOptions={(options, state) => options}

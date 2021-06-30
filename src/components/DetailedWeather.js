@@ -14,7 +14,13 @@ import { Description, CityDetail, Temperature } from './SubComponents'
 const Transition = forwardRef(function Transition (props, ref) {
   return <Zoom ref={ref} {...props} />
 })
-export default function DetailedWeather ({ open, onClose, forecast }) {
+export default function DetailedWeather ({
+  open,
+  onClose,
+  onAdd,
+  forecast,
+  showAdd
+}) {
   const classes = makeStyles({
     dialog: {
       backgroundImage: forecast.background
@@ -35,6 +41,11 @@ export default function DetailedWeather ({ open, onClose, forecast }) {
     >
       <DialogContent className={classes.dialog}>
         <DialogActions>
+          {showAdd && (
+            <Button onClick={onAdd} color='secondary'>
+              Add
+            </Button>
+          )}
           <Button onClick={onClose} color='secondary'>
             Done
           </Button>

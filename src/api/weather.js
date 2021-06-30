@@ -2,12 +2,13 @@ export default async function getForecast (city) {
   const url = new URL(
     'https://community-open-weather-map.p.rapidapi.com/weather'
   )
+  console.log(city)
 
   if (city.name) {
     url.search = new URLSearchParams({ q: city.name })
   } else if (city.lat && city.lon) {
     url.search = new URLSearchParams({ lat: city.lat, lon: city.lon })
-  } else throw Error('Enter City!')
+  } else throw Error('Invalid City Object')
 
   const requestOptions = {
     method: 'GET',

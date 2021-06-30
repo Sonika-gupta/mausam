@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react'
 import { Card, CardActionArea, CardContent } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
 import { Description, CityDetail, Temperature } from './SubComponents'
+import { makeStyles } from '@material-ui/core/styles'
 import { calculateDetails } from '../utils'
-// import getForecast from '../api/weather'
 
 import { WeatherForecastAPI as data } from '../sample-data.json'
 const getForecast = loc => {
@@ -24,19 +23,13 @@ const useStyles = makeStyles({
   }
 })
 
-export default function Forecast ({
-  city,
-  unit,
-  onSelectForecast,
-  setSelectedForecast
-}) {
+export default function Forecast ({ city, unit, onSelectForecast }) {
   console.log('Loaded city and unit')
   const [forecast, setForecast] = useState('')
 
   useEffect(() => {
     ;(async () => {
       setForecast(calculateDetails(await getForecast(city)))
-      setSelectedForecast(forecast)
     })()
   }, [city])
   console.log('Loaded forecast')

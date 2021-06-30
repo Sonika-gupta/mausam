@@ -28,3 +28,4 @@ flow.md
 public/backgrounds/weather-backgrounds
 background.txt
 package-lock.json
+src/useReducer.js
