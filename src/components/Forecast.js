@@ -1,13 +1,25 @@
 import { useState, useEffect } from 'react'
-import { Card, CardActionArea, CardContent } from '@material-ui/core'
-import { Description, CityDetail, Temperature } from './SubComponents'
+import {
+  Card,
+  CardActionArea,
+  CardContent,
+  Container,
+  Typography
+} from '@material-ui/core'
+import { WeatherIcon, Temperature, Time, Description } from './SubComponents'
 import { makeStyles } from '@material-ui/core/styles'
-import { calculateDetails } from '../utils'
+import { getTime, getBackground, getTemp } from '../utils'
 
-import { WeatherForecastAPI as data } from '../sample-data.json'
+import { OneCallAPI as data } from '../sample-data.json'
 const getForecast = loc => {
-  console.log('fetching forecast', loc)
-  return data[loc.name.toLowerCase()] || data['london']
+  console.log('fetching forecast', loc, data)
+  return data
+}
+function setDetails (forecast, city) {
+  Object.assign(forecast.current, getTemp(forecast.current))
+  forecast.background = getBackground(forecast.current.weather[0])
+  forecast.city = city
+  return forecast
 }
 
 const useStyles = makeStyles({
@@ -29,7 +41,7 @@ export default function Forecast ({ city, unit, onSelectForecast }) {
 
   useEffect(() => {
     ;(async () => {
-      setForecast(calculateDetails(await getForecast(city)))
+      setForecast(setDetails(await getForecast(city), city))
     })()
   }, [city])
   console.log('Loaded forecast')
@@ -48,13 +60,14 @@ export default function Forecast ({ city, unit, onSelectForecast }) {
             onClick={() => onSelectForecast(forecast)}
           >
             <CardContent>
-              <Description weather={forecast.weather[0]} />
+              <WeatherIcon weather={forecast.current.weather[0]} />
             </CardContent>
             <CardContent className={classes.city}>
-              <CityDetail forecast={forecast} />
+              <Time timezone={forecast.timezone_offset} />
+              <Typography variant='h5'>{forecast.city.name}</Typography>
             </CardContent>
             <CardContent className={classes.temperature}>
-              <Temperature temperature={forecast.main[unit]} />
+              <Temperature temperature={forecast.current[unit]} />
             </CardContent>
           </CardActionArea>
         </Card>

@@ -4,7 +4,6 @@ import {
   Container,
   createMuiTheme,
   IconButton,
-  Switch,
   ThemeProvider
 } from '@material-ui/core'
 import SearchIcon from '@material-ui/icons/Search'
@@ -12,12 +11,17 @@ import SearchIcon from '@material-ui/icons/Search'
 import DetailedWeather from './components/DetailedWeather'
 import Forecast from './components/Forecast'
 import Search from './components/Search'
+import UnitInput from './components/UnitInput '
 
 import { getCity } from './api/places'
-import getForecast from './api/weather'
+// import { getForecast, getDetailedForecast } from './api/weather'
 
 import './App.css'
 
+import { OneCallAPI as data } from './sample-data.json'
+async function getDetailedForecast (city) {
+  return data
+}
 const theme = createMuiTheme({
   palette: {
     type: 'dark',
@@ -73,7 +77,7 @@ function App () {
   }
 
   async function viewDetailedWeather ({ forecast, city }) {
-    forecast ? setShowAdd(false) : (forecast = await getForecast(city))
+    forecast ? setShowAdd(false) : (forecast = await getDetailedForecast(city))
     setOpenWeather(true)
     setSelectedForecast(forecast)
   }
@@ -97,18 +101,7 @@ function App () {
           ))}
         </Container>
         <Container maxWidth='md'>
-          <div style={{ float: 'left', color: 'white' }}>
-            &deg;F
-            <Switch
-              checked={unit === 'metric'}
-              onChange={(e, isMetric) =>
-                updateUnit(isMetric ? 'metric' : 'imperial')
-              }
-              name='unit'
-              color='primary'
-            />
-            &deg;C
-          </div>
+          <UnitInput unit={unit} updateUnit={updateUnit} />
           <IconButton
             color='primary'
             aria-label='Search City'

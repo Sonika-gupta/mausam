@@ -1,15 +1,19 @@
-import { forwardRef } from 'react'
+import { useState, forwardRef } from 'react'
 import {
   Button,
+  Container,
   Dialog,
   DialogActions,
   DialogContent,
   Grid,
-  Paper,
+  Typography,
   Zoom
 } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core'
-import { Description, CityDetail, Temperature } from './SubComponents'
+import Current from './Current'
+import Hourly from './Hourly'
+import Daily from './Daily'
+import UnitInput from './UnitInput '
 
 const Transition = forwardRef(function Transition (props, ref) {
   return <Zoom ref={ref} {...props} />
@@ -21,6 +25,7 @@ export default function DetailedWeather ({
   forecast,
   showAdd
 }) {
+  const [unit, setUnit] = useState(localStorage.getItem('unit'))
   const classes = makeStyles({
     dialog: {
       backgroundImage: forecast.background
@@ -40,29 +45,35 @@ export default function DetailedWeather ({
       classes={{ paper: classes.dialogPaper }}
     >
       <DialogContent className={classes.dialog}>
-        <DialogActions>
-          {showAdd && (
-            <Button onClick={onAdd} color='secondary'>
-              Add
-            </Button>
-          )}
-          <Button onClick={onClose} color='secondary'>
-            Done
-          </Button>
-        </DialogActions>
-        <Grid container spacing={2} style={{ height: '100%' }}>
-          <Grid item xs={12} className={classes.grid}>
-            {forecast && (
-              <Paper
-                variant='outlined'
-                style={{ background: 'transparent', border: 'none' }}
-              >
-                <CityDetail forecast={forecast} />
-                <Temperature temperature={forecast.main.temp} />
-                <Description weather={forecast.weather[0]} />
-              </Paper>
-            )}
+        <Grid
+          container
+          spacing={10}
+          style={{ height: '100%' }}
+          justify='space-between'
+        >
+          <Grid item>
+            <UnitInput unit={unit} updateUnit={value => setUnit(value)} />
           </Grid>
+          <Grid item>
+            <DialogActions>
+              {showAdd && (
+                <Button onClick={onAdd} color='secondary'>
+                  Add
+                </Button>
+              )}
+              <Button onClick={onClose} color='secondary'>
+                Done
+              </Button>
+            </DialogActions>
+          </Grid>
+
+          <Current forecast={forecast} unit={unit} />
+          <Hourly
+            forecast={forecast.hourly}
+            unit={unit}
+            timezone={forecast.timezone_offset}
+          />
+          <Daily forecast={forecast.daily} unit={unit} />
         </Grid>
       </DialogContent>
     </Dialog>

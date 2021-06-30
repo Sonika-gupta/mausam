@@ -1,31 +1,40 @@
-import Typography from '@material-ui/core/Typography'
+import { Typography } from '@material-ui/core'
+import { getTime } from '../utils'
 
-function Description ({ weather }) {
+function WeatherIcon ({ weather, size }) {
   return (
     <img
-      style={{ marginTop: '25%' }}
+      style={{ margin: 'auto' }}
       src={`http://openweathermap.org/img/w/${weather.icon}.png`}
       alt={weather.description}
-    ></img>
+      caption={weather.description}
+      width={size}
+      height={size}
+    />
   )
 }
-
-function CityDetail ({ forecast }) {
+function Description ({ weather, variant = 'subtitle' }) {
   return (
-    <>
-      <Typography variant='overline'>{forecast.time}</Typography>
-      <Typography variant='h5'>{forecast.name}</Typography>
-    </>
+    <Typography
+      component='div'
+      align='center'
+      variant={variant}
+      style={{ textTransform: 'capitalize' }}
+    >
+      {weather.description}
+    </Typography>
   )
 }
+function Time ({ dt, timezone }) {
+  return <Typography variant='body1'>{getTime(timezone, dt)}</Typography>
+}
 
-function Temperature ({ temperature }) {
+function Temperature ({ temperature, variant = 'h3' }) {
   return (
-    <Typography variant='h3'>
-      {temperature}
-      &deg;
+    <Typography align='center' variant={variant}>
+      {temperature}&deg;
     </Typography>
   )
 }
 
-export { Description, CityDetail, Temperature }
+export { WeatherIcon, Temperature, Description, Time }
