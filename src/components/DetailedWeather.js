@@ -1,12 +1,10 @@
 import { useState, forwardRef } from 'react'
 import {
   Button,
-  Container,
   Dialog,
   DialogActions,
   DialogContent,
   Grid,
-  Typography,
   Zoom
 } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core'
@@ -66,14 +64,17 @@ export default function DetailedWeather ({
               </Button>
             </DialogActions>
           </Grid>
-
           <Current forecast={forecast} unit={unit} />
           <Hourly
             forecast={forecast.hourly}
             unit={unit}
-            timezone={forecast.timezone_offset}
+            timezone={forecast.timezone}
           />
-          <Daily forecast={forecast.daily} unit={unit} />
+          <Daily
+            forecast={forecast.daily}
+            unit={unit}
+            timezone={forecast.timezone}
+          />
         </Grid>
       </DialogContent>
     </Dialog>

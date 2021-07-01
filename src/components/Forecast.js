@@ -3,24 +3,17 @@ import {
   Card,
   CardActionArea,
   CardContent,
-  Container,
   Typography
 } from '@material-ui/core'
-import { WeatherIcon, Temperature, Time, Description } from './SubComponents'
+import { WeatherIcon, Temperature, Time } from './SubComponents'
 import { makeStyles } from '@material-ui/core/styles'
-import { getTime, getBackground, getTemp } from '../utils'
-
+import { getDetailedForecast } from '../api/weather'
+/*
 import { OneCallAPI as data } from '../sample-data.json'
-const getForecast = loc => {
+const getDetailedForecast = loc => {
   console.log('fetching forecast', loc, data)
   return data
-}
-function setDetails (forecast, city) {
-  Object.assign(forecast.current, getTemp(forecast.current))
-  forecast.background = getBackground(forecast.current.weather[0])
-  forecast.city = city
-  return forecast
-}
+} */
 
 const useStyles = makeStyles({
   card: {
@@ -41,7 +34,7 @@ export default function Forecast ({ city, unit, onSelectForecast }) {
 
   useEffect(() => {
     ;(async () => {
-      setForecast(setDetails(await getForecast(city), city))
+      setForecast(await getDetailedForecast(city))
     })()
   }, [city])
   console.log('Loaded forecast')
@@ -63,7 +56,7 @@ export default function Forecast ({ city, unit, onSelectForecast }) {
               <WeatherIcon weather={forecast.current.weather[0]} />
             </CardContent>
             <CardContent className={classes.city}>
-              <Time timezone={forecast.timezone_offset} />
+              <Time timezone={forecast.timezone} variant='caption' />
               <Typography variant='h5'>{forecast.city.name}</Typography>
             </CardContent>
             <CardContent className={classes.temperature}>

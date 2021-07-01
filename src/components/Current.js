@@ -1,5 +1,5 @@
 import { Container, Grid, Typography } from '@material-ui/core'
-import { WeatherIcon, Temperature, Description } from './SubComponents'
+import { Temperature, Description } from './SubComponents'
 
 export default function Current ({ forecast, unit }) {
   return (

@@ -1,3 +1,5 @@
+import { getBackground, getTemp } from '../utils'
+
 async function getForecast (city) {
   const url = new URL(
     'https://community-open-weather-map.p.rapidapi.com/weather'
@@ -21,7 +23,11 @@ async function getForecast (city) {
   return await res.json()
 }
 
-async function getDetailedForecast ({ coordinates: { latitude, longitude } }) {
+async function getDetailedForecast (city) {
+  const {
+    coordinates: { latitude, longitude }
+  } = city
+  console.log(latitude, longitude)
   const [lat, lon, part, key] = [
     latitude,
     longitude,
@@ -30,6 +36,13 @@ async function getDetailedForecast ({ coordinates: { latitude, longitude } }) {
   ]
   const url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=${part}&appid=${key}`
   const res = await fetch(url)
-  return await res.json()
+  return setDetails(await res.json(), city)
+}
+
+function setDetails (forecast, city) {
+  Object.assign(forecast.current, getTemp(forecast.current.temp))
+  forecast.background = getBackground(forecast.current.weather[0])
+  forecast.city = city
+  return forecast
 }
 export { getForecast, getDetailedForecast }

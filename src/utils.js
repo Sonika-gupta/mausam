@@ -1,14 +1,19 @@
 const getTime = (timezone, dt = Date.now()) => {
-  console.log(dt, timezone)
-  const date = new Date(dt + timezone * 1000)
-  console.log(date)
-  const x = date.toLocaleTimeString('en-US', {
-    timeZone: 'UTC',
-    hour: '2-digit',
-    minute: '2-digit'
-  })
-  console.log(x)
-  return x
+  const date = new Date(dt)
+  return new Intl.DateTimeFormat('en', {
+    timeStyle: 'short',
+    timeZone: timezone
+  }).format(date)
+}
+
+const getDay = (timezone, dt) => {
+  const date = new Date(dt)
+  return new Intl.DateTimeFormat('en', {
+    weekday: 'short',
+    month: 'short',
+    day: '2-digit',
+    timeZone: timezone
+  }).format(date)
 }
 
 const getBackground = ({ icon, main, description }) => {
@@ -33,10 +38,10 @@ const getBackground = ({ icon, main, description }) => {
   return (image1 ? `url(${image1}),` : '') + `url(${image2})`
 }
 
-function getTemp (weather) {
+function getTemp (temp) {
   return {
-    metric: parseInt(weather.temp - 276.15),
-    imperial: parseInt(((weather.temp - 276.15) * 9) / 5 + 32)
+    metric: parseInt(temp - 276.15),
+    imperial: parseInt(((temp - 276.15) * 9) / 5 + 32)
   }
 }
-export { getTime, getBackground, getTemp }
+export { getTime, getDay, getBackground, getTemp }

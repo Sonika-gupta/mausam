@@ -1,7 +1,6 @@
 import {
   GridList,
   GridListTile,
-  GridListTileBar,
   Typography,
   makeStyles
 } from '@material-ui/core'
@@ -29,8 +28,8 @@ export default function Hourly ({ forecast, unit, timezone }) {
     <div className={classes.root}>
       <Typography variant='overline'>Hourly Forecast</Typography>
       <GridList cols={4} spacing={0} className={classes.gridList}>
-        {forecast.map(weather => (
-          <GridListTile cols={0.5}>
+        {forecast.map((weather, i) => (
+          <GridListTile cols={0.5} key={i}>
             <Tile
               weather={weather}
               unit={unit}

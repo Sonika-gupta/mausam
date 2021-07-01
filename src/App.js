@@ -14,14 +14,14 @@ import Search from './components/Search'
 import UnitInput from './components/UnitInput '
 
 import { getCity } from './api/places'
-// import { getForecast, getDetailedForecast } from './api/weather'
+import { getDetailedForecast } from './api/weather'
 
 import './App.css'
-
+/*
 import { OneCallAPI as data } from './sample-data.json'
 async function getDetailedForecast (city) {
   return data
-}
+} */
 const theme = createMuiTheme({
   palette: {
     type: 'dark',
@@ -78,8 +78,9 @@ function App () {
 
   async function viewDetailedWeather ({ forecast, city }) {
     forecast ? setShowAdd(false) : (forecast = await getDetailedForecast(city))
-    setOpenWeather(true)
+    console.log(forecast, city)
     setSelectedForecast(forecast)
+    setOpenWeather(true)
   }
 
   async function handleCitySelection (newCity) {
