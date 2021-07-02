@@ -12,6 +12,7 @@ import Current from './Current'
 import Hourly from './Hourly'
 import Daily from './Daily'
 import UnitInput from './UnitInput '
+import DayDetails from './DayDetails'
 
 const Transition = forwardRef(function Transition (props, ref) {
   return <Zoom ref={ref} {...props} />
@@ -74,6 +75,11 @@ export default function DetailedWeather ({
             forecast={forecast.daily}
             unit={unit}
             timezone={forecast.timezone}
+          />
+          <DayDetails
+            weather={forecast.current}
+            timezone={forecast.timezone}
+            unit={unit}
           />
         </Grid>
       </DialogContent>

@@ -9,7 +9,7 @@ import { Day } from './SubComponents'
 
 const useStyles = makeStyles({
   root: {
-    margin: '50px auto',
+    marginTop: '50px',
     overflow: 'hidden',
     width: '100%'
   },

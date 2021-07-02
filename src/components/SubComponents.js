@@ -1,5 +1,5 @@
 import { Typography } from '@material-ui/core'
-import { getTime, getDay } from '../utils'
+import { getTime, getDay, getTemp } from '../utils'
 
 function WeatherIcon ({ weather, size }) {
   return (
@@ -26,18 +26,20 @@ function Description ({ weather, variant = 'subtitle1' }) {
   )
 }
 
-function Time ({ dt, timezone }) {
-  return <Typography variant='body1'>{getTime(timezone, dt)}</Typography>
+function Time ({ dt, timezone, variant = 'body1' }) {
+  return <Typography variant={variant}>{getTime(timezone, dt)}</Typography>
 }
 
 function Day ({ dt, timezone }) {
   return <Typography variant='caption'>{getDay(timezone, dt)}</Typography>
 }
 
-function Temperature ({ temperature, variant = 'h3' }) {
+function Temperature ({ temperature, unit, variant = 'h3' }) {
+  console.log(temperature)
+  const temp = unit ? getTemp(temperature)[unit] : temperature
   return (
     <Typography align='center' variant={variant}>
-      {temperature}&deg;
+      {temp}&deg;
     </Typography>
   )
 }
