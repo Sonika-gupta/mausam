@@ -73,10 +73,10 @@ function App () {
   }
 
   async function viewDetailedWeather ({ forecast, city }) {
-    console.log('forecast', forecast, 'city', city?.name, 'showAdd', showAdd)
+    // console.log('forecast', forecast, 'city', city?.name, 'showAdd', showAdd)
     if (forecast) {
       setShowAdd(false)
-      console.log('forecast', forecast, 'city', city?.name, 'showAdd', showAdd)
+      // console.log('forecast', forecast, 'city', city?.name, 'showAdd', showAdd)
     } else {
       forecast = await getDetailedForecast(city)
     }
@@ -124,6 +124,8 @@ function App () {
           onClose={() => setOpenWeather(false)}
           onAdd={addCity}
           showAdd={showAdd}
+          unit={unit}
+          updateUnit={updateUnit}
         />
       </ThemeProvider>
     </div>

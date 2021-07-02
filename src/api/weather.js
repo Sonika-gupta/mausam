@@ -25,11 +25,10 @@ async function getForecast (city) {
 }
 
 async function getDetailedForecast (city) {
-  console.log('in getdetailedforecast')
   const {
     coordinates: { latitude, longitude }
   } = city
-  console.log(latitude, longitude)
+  console.log('Getting detailed forecast for ', latitude, longitude)
   const [lat, lon, part, key] = [
     latitude,
     longitude,

@@ -22,9 +22,10 @@ export default function DetailedWeather ({
   onClose,
   onAdd,
   forecast,
-  showAdd
+  showAdd,
+  unit,
+  updateUnit
 }) {
-  const [unit, setUnit] = useState(localStorage.getItem('unit'))
   const classes = makeStyles({
     dialog: {
       backgroundImage: forecast.background
@@ -51,7 +52,7 @@ export default function DetailedWeather ({
           justify='space-between'
         >
           <Grid item>
-            <UnitInput unit={unit} updateUnit={value => setUnit(value)} />
+            <UnitInput unit={unit} updateUnit={updateUnit} />
           </Grid>
           <Grid item>
             <DialogActions>
