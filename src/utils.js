@@ -1,19 +1,28 @@
-const getTime = (timezone, dt = Date.now()) => {
-  const date = new Date(dt)
-  return new Intl.DateTimeFormat('en', {
-    timeStyle: 'short',
-    timeZone: timezone
-  }).format(date)
+const getTime = (timezone, dt) => {
+  const date = dt ? new Date(dt * 1000) : new Date()
+  console.log(dt, timezone)
+  return date.toLocaleTimeString('en-US', {
+    timeZone: timezone,
+    hour: '2-digit',
+    minute: '2-digit'
+  })
 }
 
 const getDay = (timezone, dt) => {
-  const date = new Date(dt)
-  return new Intl.DateTimeFormat('en', {
+  /* const date = new Date(dt)
+   return new Intl.DateTimeFormat('en', {
     weekday: 'short',
     month: 'short',
     day: '2-digit',
     timeZone: timezone
-  }).format(date)
+  }).format(date) */
+  const date = new Date(dt * 1000)
+  return date.toLocaleDateString('en-US', {
+    timeZone: timezone,
+    weekday: 'short',
+    month: 'short',
+    day: 'numeric'
+  })
 }
 
 const getBackground = ({ icon, main, description }) => {

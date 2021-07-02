@@ -17,11 +17,7 @@ import { getCity } from './api/places'
 import { getDetailedForecast } from './api/weather'
 
 import './App.css'
-/*
-import { OneCallAPI as data } from './sample-data.json'
-async function getDetailedForecast (city) {
-  return data
-} */
+
 const theme = createMuiTheme({
   palette: {
     type: 'dark',
@@ -78,7 +74,7 @@ function App () {
 
   async function viewDetailedWeather ({ forecast, city }) {
     forecast ? setShowAdd(false) : (forecast = await getDetailedForecast(city))
-    console.log(forecast, city)
+    console.log('forecast', forecast, 'city', city)
     setSelectedForecast(forecast)
     setOpenWeather(true)
   }
