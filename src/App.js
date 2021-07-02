@@ -73,8 +73,13 @@ function App () {
   }
 
   async function viewDetailedWeather ({ forecast, city }) {
-    forecast ? setShowAdd(false) : (forecast = await getDetailedForecast(city))
-    console.log('forecast', forecast, 'city', city)
+    console.log('forecast', forecast, 'city', city?.name, 'showAdd', showAdd)
+    if (forecast) {
+      setShowAdd(false)
+      console.log('forecast', forecast, 'city', city?.name, 'showAdd', showAdd)
+    } else {
+      forecast = await getDetailedForecast(city)
+    }
     setSelectedForecast(forecast)
     setOpenWeather(true)
   }

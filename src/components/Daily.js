@@ -30,7 +30,7 @@ export default function Daily ({ forecast, unit, timezone }) {
       <Typography variant='overline'>Daily Forecast</Typography>
       <GridList cols={4} spacing={0} className={classes.gridList}>
         {forecast.map(weather => (
-          <GridListTile cols={0.5} key={forecast.dt}>
+          <GridListTile cols={0.5} key={weather.dt}>
             <Tile
               weather={weather}
               unit={unit}

@@ -1,6 +1,5 @@
 const getTime = (timezone, dt) => {
   const date = dt ? new Date(dt * 1000) : new Date()
-  console.log(dt, timezone)
   return date.toLocaleTimeString('en-US', {
     timeZone: timezone,
     hour: '2-digit',

@@ -31,7 +31,6 @@ export default function Forecast ({ city, unit, onSelectForecast }) {
       setForecast(await getDetailedForecast(city))
     })()
   }, [city])
-  console.log('Loaded forecast')
 
   const classes = useStyles()
   return (

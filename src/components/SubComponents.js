@@ -35,7 +35,7 @@ function Day ({ dt, timezone }) {
 }
 
 function Temperature ({ temperature, unit, variant = 'h3' }) {
-  console.log(temperature)
+  // console.log('temperature', temperature)
   const temp = unit ? getTemp(temperature)[unit] : temperature
   return (
     <Typography align='center' variant={variant}>
