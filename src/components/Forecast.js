@@ -8,12 +8,6 @@ import {
 import { WeatherIcon, Temperature, Time } from './SubComponents'
 import { makeStyles } from '@material-ui/core/styles'
 import { getDetailedForecast } from '../api/weather'
-/*
-import { OneCallAPI as data } from '../sample-data.json'
-const getDetailedForecast = loc => {
-  console.log('fetching forecast', loc, data)
-  return data
-} */
 
 const useStyles = makeStyles({
   card: {

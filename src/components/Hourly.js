@@ -16,7 +16,8 @@ const useStyles = makeStyles({
   },
   gridList: {
     flexWrap: 'nowrap',
-    borderTop: 'solid 1px white'
+    borderTop: 'solid 1px white',
+    borderBottom: 'solid 1px white'
   },
   gridListTile: {
     margin: 'auto'

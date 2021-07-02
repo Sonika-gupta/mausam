@@ -8,11 +8,6 @@ import {
 import Autocomplete from '@material-ui/lab/Autocomplete'
 import { getSearchOptions } from '../api/places'
 
-/* import { del as data } from '../sample-data.json'
-async function getSearchOptions () {
-  return data
-} */
-
 /* function useDebounce (value, delay) {
   const [debouncedValue, setDebouncedValue] = useState(value)
   useEffect(() => {

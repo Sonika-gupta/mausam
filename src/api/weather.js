@@ -1,3 +1,4 @@
+import { OneCallAPI as res } from '../sample-data.json'
 import { getBackground, getTemp } from '../utils'
 
 async function getForecast (city) {
@@ -24,7 +25,8 @@ async function getForecast (city) {
 }
 
 async function getDetailedForecast (city) {
-  const {
+  console.log('in getdetailedforecast')
+  /*  const {
     coordinates: { latitude, longitude }
   } = city
   console.log(latitude, longitude)
@@ -36,7 +38,10 @@ async function getDetailedForecast (city) {
   ]
   const url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=${part}&appid=${key}`
   const res = await fetch(url)
-  return setDetails(await res.json(), city)
+  return setDetails(await res.json(), city) */
+  const x = setDetails(res, city)
+  console.log(x)
+  return x
 }
 
 function setDetails (forecast, city) {

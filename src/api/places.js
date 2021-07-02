@@ -1,5 +1,6 @@
+import { del as data } from '../sample-data.json'
 async function getSearchOptions (query) {
-  const url = new URL('https://spott.p.rapidapi.com/places/autocomplete')
+  /*  const url = new URL('https://spott.p.rapidapi.com/places/autocomplete')
   url.search = new URLSearchParams({
     type: 'CITY',
     q: query,
@@ -7,6 +8,8 @@ async function getSearchOptions (query) {
   })
 
   return await requestApi(url)
+ */
+  return data
 }
 
 async function getCity ({ latitude, longitude }) {
