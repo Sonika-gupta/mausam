@@ -20,7 +20,11 @@ const useStyles = makeStyles({
     borderBottom: 'solid 1px white'
   },
   gridListTile: {
-    margin: 'auto'
+    background: 'transparent',
+    border: 'none',
+    textAlign: 'center',
+    padding: '5px',
+    minWidth: '100px'
   }
 })
 export default function Hourly ({ forecast, unit, timezone }) {
@@ -30,17 +34,12 @@ export default function Hourly ({ forecast, unit, timezone }) {
       <Typography variant='overline'>Hourly Forecast</Typography>
       <GridList cols={4} spacing={0} className={classes.gridList}>
         {forecast.map((weather, i) => (
-          <GridListTile cols={0.5} key={i}>
-            <Tile
-              weather={weather}
-              unit={unit}
-              children={
-                <>
-                  <hr style={{ width: '100%', margin: '10px 0' }} />
-                  <Time timezone={timezone} dt={weather.dt} />
-                </>
-              }
-            />
+          <GridListTile cols={0.5} key={i} className={classes.gridListTile}>
+            <Tile weather={weather} unit={unit} />
+            <div>
+              <hr style={{ width: '100%', margin: '10px auto' }} />
+              <Time timezone={timezone} dt={weather.dt} />
+            </div>
           </GridListTile>
         ))}
       </GridList>

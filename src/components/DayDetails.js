@@ -6,17 +6,21 @@ import {
   makeStyles
 } from '@material-ui/core'
 import { Time, Temperature } from './SubComponents'
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   root: {
     margin: '50px auto'
   },
   gridList: {
     borderTop: 'solid 1px white',
     borderBottom: 'solid 1px white',
-    marginTop: '0'
+    paddingLeft: 'revert'
   },
-  listItem: {}
-})
+  listItem: {
+    [theme.breakpoints.down('xs')]: {
+      width: '100% !important'
+    }
+  }
+}))
 
 export default function DayDetails ({ weather, timezone, unit }) {
   const classes = useStyles()
@@ -58,14 +62,10 @@ export default function DayDetails ({ weather, timezone, unit }) {
               className={classes.listItem}
               style={{ height: 'auto' }}
             >
-              <ListSubheader
-                inset
-                component='div'
-                style={{ textTransform: 'uppercase' }}
-              >
+              <ListSubheader style={{ textTransform: 'uppercase' }}>
                 {prop.replaceAll('_', ' ')}
               </ListSubheader>
-              <div>{component}</div>
+              {component}
             </ListItem>
           )
         })}

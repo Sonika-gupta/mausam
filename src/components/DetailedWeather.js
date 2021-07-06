@@ -1,4 +1,4 @@
-import { useState, forwardRef } from 'react'
+import { forwardRef } from 'react'
 import {
   Button,
   Dialog,
@@ -28,6 +28,7 @@ export default function DetailedWeather ({
 }) {
   const classes = makeStyles({
     dialog: {
+      minwidth: '400px',
       backgroundImage: forecast.background
     },
     dialogPaper: {

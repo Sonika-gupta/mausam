@@ -30,7 +30,6 @@ export default function Current ({ forecast, unit }) {
           <Temperature temperature={forecast.current[unit]} variant='h2' />
         </Grid>
         <Container>
-          {/* <WeatherIcon weather={forecast.current.weather[0]} size='100px' /> */}
           <Description weather={forecast.current.weather[0]} />
         </Container>
       </Grid>

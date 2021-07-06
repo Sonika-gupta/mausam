@@ -5,10 +5,10 @@ import { Paper } from '@material-ui/core'
 const styles = {
   background: 'transparent',
   border: 'none',
-  display: 'flex',
-  flexDirection: 'column',
-  textAlign: 'center',
-  padding: '10px 0'
+  width: '100%',
+  height: '72%',
+  alignItems: 'center',
+  minWidth: '100px'
 }
 
 export default function Tile ({ weather, unit, type, children }) {
@@ -20,7 +20,6 @@ export default function Tile ({ weather, unit, type, children }) {
       <WeatherIcon weather={weather.weather[0]} />
       <Temperature temperature={weather[unit]} variant='h5' />
       <Description weather={weather.weather[0]} variant='caption' />
-      {children}
     </Paper>
   )
 }
