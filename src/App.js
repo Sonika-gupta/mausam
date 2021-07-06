@@ -38,7 +38,7 @@ function App () {
   )
   const [openWeather, setOpenWeather] = useState(false)
   const [openSearch, setOpenSearch] = useState(false)
-  const [showAdd, setShowAdd] = useState(true)
+  const [showAdd, setShowAdd] = useState(false)
   const [selectedForecast, setSelectedForecast] = useState('')
   const [selectedCity, setSelectedCity] = useState('')
 
@@ -73,12 +73,9 @@ function App () {
   }
 
   async function viewDetailedWeather ({ forecast, city }) {
-    // console.log('forecast', forecast, 'city', city?.name, 'showAdd', showAdd)
-    if (forecast) {
-      setShowAdd(false)
-      // console.log('forecast', forecast, 'city', city?.name, 'showAdd', showAdd)
-    } else {
+    if (!forecast) {
       forecast = await getDetailedForecast(city)
+      setShowAdd(true)
     }
     setSelectedForecast(forecast)
     setOpenWeather(true)
